@@ -1,0 +1,2 @@
+# rerank-instruction
+下载用于完成大模型information retrieval中rerank阶段训练的数据集，并编写该阶段的instruction
