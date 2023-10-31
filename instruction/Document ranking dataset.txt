@@ -1,0 +1,297 @@
+一、
+INPUT:
+precondition:Given <num> documents and a query, each indicated by number identifier []. Given a sorted list of identifiers.
+target:Sort all documents corresponding to docid in document_id from highest to lowest according to their relevance to query corresponding to qid in query_id. Determine which is the best sort result.
+
+example:
+<                                                                                           ╮
+	query:<query>                                                                       │
+	document:[1]<document1>,[2]<document2>,[3]<document3>,,......,[{num}]<document{num}>│
+	options:<              ╮                                                           │
+	[1],[2],[3],...,[{num}]│                                                           ├大概写3个example
+	[2],[1],[3],...,[{num}]├大概写10个选项                                             │
+	......                 │                                                           │
+	[5],[4],[2],...,[{num}]│                                                           │
+	>                      ╯                                                           │
+	OUTPUT:[1],[2],[3],...,[{num}]                                                      │                                                         │
+>                                                                                           ╯
+
+query:<query>
+document:[1]<document1>,[2]<document2>,[3]<document3>,,......,[num]<documentnum>
+options:<            ╮
+[1],[2],[3],...,[num]│
+[2],[1],[3],...,[num]├大概写10个选项
+......               │
+[5],[4],[2],...,[num]│ 
+>                    ╯ 
+
+OUTPUT:
+a ranked list
+
+
+
+二、
+INPUT:
+target:Please write a question based on the document.
+
+example:
+<
+	document:<document>╮
+	OUTPUT:            ├大概写3个example
+	question:<query>   ╯
+>
+
+document:<document>
+
+OUTPUT:
+question:<query>
+
+
+
+三、
+INPUT:
+target:Given a document and a query, predict whether the document includes an answer to the query by producing either 'Yes' or 'No'.
+
+document:<document1>
+Query:<query1>
+Answer:Yes/No
+
+document:<document2>
+Query:<query2>
+Answer:Yes/No
+
+document:<document3>
+Query:<query3>
+Answer:Yes/No
+
+......
+
+document:<document>
+Query:<query>
+
+OUTPUT:Yes/No
+
+
+
+四、
+INPUT:
+precondition:The following are <num> documents in options, each indicated by number identifier []. 
+target:You should rank the <num> documents above based on their relevance to the search query. The documents will be listed in strictly descending order using identifiers, and the most relevant documents should be listed first, and the output format should be [] > [] > etc, e.g., [1] > [2] > etc. You should return an identifiers list. 
+
+example:
+<
+	options:<		    ╮
+	[1]<document1>              │
+	[2]<document2>              │
+	[3]<document3>              │
+	......                      ├大概写3个example
+	[{num}]<{documentnum}>      │
+	The search query is: <query>│
+		                    │
+	OUTPUT:an identifiers list  ╯
+>
+
+options:<
+[1]<document1>
+[2]<document2>
+[3]<document3>
+......
+[{num}]<{documentnum}>
+The search query is: <query>
+
+OUTPUT:an identifiers list
+
+
+
+五、
+INPUT: 
+You are RankGPT, an intelligent assistant that can rank documents based on their relevancy to the query
+I will provide you with <num> documents, each indicated by number identifier []. Rank them based on their relevance to query: <query>.
+
+OUTPUT: Okay, please provide the documents.
+
+INPUT: [1] <document_1>
+
+OUTPUT: Received document [1]
+
+INPUT: [2] <document_2>
+
+OUTPUT: Received document [2]
+
+......
+
+INPUT: Search Query: <query>.
+Rank the <num> documents above based on their relevance to the search query. The documents should be listed in strictly descending order using identifiers, and the most relevant documents should be listed first, and the output format should be [] > [], e.g., [1] > [2]. Only response the ranking results, do not say any word or explain.
+
+OUTPUT:an identifiers list
+
+
+
+六、
+INPUT: 
+precondition:Given three documents and a query, each indicated by number identifier []. 
+target:Determine which of the articles indicated [2] or [3] is more relevant to the query than the document indicated [1], and return the document identifier.
+(The document indicated [1] has the weakest relevancy with query. )
+
+example:
+<
+	options:<                        ╮                   
+	[1]<document1>                   │
+	[2]<document2>                   │
+	[3]<document3>                   ├大概写3个example
+	>                                │
+	Query:<query>                    │
+                                         │
+	OUTPUT:target document identifier╯
+>
+
+options:<
+[1]<document1>
+[2]<document2>
+[3]<document3>
+>
+Query:<query>
+
+OUTPUT:target document identifier
+
+
+
+七、
+INPUT:
+precondition:Given three documents and a query, each indicated by number identifier []. 
+
+target:Determine which of the articles indicated [2] or [3] is more irrelevant to the query than the document indicated [1], and return the document identifier.
+(The document indicated [1] has the strongest relevancy with query. )
+
+example:
+<
+	options:<                        ╮                   
+	[1]<document1>                   │
+	[2]<document2>                   │
+	[3]<document3>                   ├大概写3个example
+	>                                │
+	Query:<query>                    │
+                                         │
+	OUTPUT:target document identifier╯
+>
+
+options:<
+[1]<document1>
+[2]<document2>
+[3]<document3>
+>
+
+Query:<query>
+
+OUTPUT:target document identifier
+
+
+
+八、
+INPUT:
+precondition:Given <num> documents and a query, each indicated by number identifier []. Given a sorted list of identifiers.
+target:Determine whether the sorted list is listed in strictly descending order using identifiers according to the relevancy of documents to the query by producing either 'Yes' or 'No', where the identifier of the most relevant document is listed first.
+
+example:
+<
+	query:<query>            ╮                   
+	document:                │
+	<                        │
+	[1]<document1>           │
+	[2]<document2>           │
+	[3]<document3>           ├大概写3个example
+	......                   │
+	>                        │
+	list:<[1'][2'][3']......>│
+                                 │
+	OUTPUT:                  │
+	Yes/No                   ╯
+>
+
+query:<query>
+document:
+<
+[1]<document1>
+[2]<document2>
+[3]<document3>
+......
+>
+list:<[1'][2'][3']......>
+
+OUTPUT:
+Yes/No
+
+
+
+九、
+INPUT:
+precondition:Given two documents and a query, each indicated by number identifier []. Given an identifier of one of the two documents.
+target:Determine whether the document corresponding to the given identifier is more relevant to the query by producing either 'Yes' or 'No'.
+
+example:
+<
+	query:<query>            ╮                   
+	document:                │
+	<                        │
+	[1]<document1>           │
+	[2]<document2>           ├大概写3个example
+	>                        │
+	identifier:<identifier>  │
+                                 │
+	OUTPUT:                  │
+	Yes/No                   ╯
+>
+
+query:<query>
+document:<
+[1]<document1>
+[2]<document2>
+>
+identifier:<identifier>
+
+OUTPUT: Yes/No
+
+
+
+
+十、
+INPUT:
+precondition:Given two documents and a query, each indicated by number identifier []. Given a sorted list of identifiers.
+target:Determine which of the two documents is more relevant to the query by producing the identifier of the more relevant document.
+
+example:
+<
+	query:<query>                          ╮                   
+	document:                              │
+	<                                      │
+	[1]<document1>                         │
+	[2]<document2>                         ├大概写3个example
+	>                                      │
+	OUTPUT:                                │
+	the identifier of the target identifier╯
+>
+
+query:<query>
+document:<
+[1]<document1>
+[2]<document2>
+>
+
+OUTPUT: the identifier of the target identifier
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
